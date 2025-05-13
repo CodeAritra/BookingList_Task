@@ -7,7 +7,7 @@ export const useForm = () => useContext(FormContext);
 const url = import.meta.env.VITE_URL;
 
 const BASE_URL = `${url}api/forms`;
-console.log("url = ",BASE_URL);
+// console.log("url = ",BASE_URL);
 
 export const FormProvider = ({ children }) => {
   const [entries, setEntries] = useState([]);
