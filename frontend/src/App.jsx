@@ -1,5 +1,4 @@
-/* eslint-disable no-unused-vars */
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {
   BrowserRouter as Router,
   Routes,
@@ -10,24 +9,36 @@ import Login from "./pages/Login";
 import RoleSelect from "./pages/RoleSelect";
 import Admin from "./pages/Admin";
 import Guest from "./pages/Guest";
+import { useAuth } from "./context/AuthContext";
 
 const App = () => {
-  const [user, setUser] = useState(false);
-  const [role, setRole] = useState("admin");
-
-  useEffect(() => {
-    console.log("user = ", user, "role = ", role);
-  }, [user, role]);
-
+  const { isLogin, role } = useAuth();
   return (
     <Router>
       <Routes>
-        <Route path="/" element={role === "guest" ? <Guest /> : <Admin />} />
-        <Route path="/showModal" element={<RoleSelect />} />
+        <Route
+          path="/"
+          element={
+            !isLogin ? (
+              <Navigate to="/login" />
+            ) : role === "admin" ? (
+              <Admin />
+            ) : role === "guest" ? (
+              <Guest />
+            ) : (
+              <Navigate to="/role" />
+            )
+          }
+        />
         <Route
           path="/login"
-          element={!user ? <Login /> : <Navigate to="/" />}
+          element={!isLogin ? <Login /> : <Navigate to="/" />}
         />
+        <Route
+          path="/role"
+          element={isLogin && !role ? <RoleSelect /> : <Navigate to="/" />}
+        />
+        <Route path="*" element={<Navigate to={isLogin ? "/" : "/login"} />} />
       </Routes>
     </Router>
   );
