@@ -9,6 +9,17 @@ A responsive role-based authentication web app using **React**, **Firebase (Goog
 🌐 [Click here to view the live site](https://bookinglist.onrender.com)
 
 ---
+## 🚀 Features
+
+- Google Sign-In using Firebase Authentication
+- Role selection after login
+- Route protection based on login and role
+- Admin can add, edit, delete data
+- Guest can only view data
+- Responsive UI with Tailwind CSS
+- Environment variables managed via `.env`
+
+---
 
 ## 🛠 Tech Stack
 
