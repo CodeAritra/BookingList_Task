@@ -1,11 +1,13 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
-import url from "../url.js";
 
 const FormContext = createContext();
 export const useForm = () => useContext(FormContext);
 
+const url = import.meta.env.VITE_URL;
+
 const BASE_URL = `${url}api/forms`;
+console.log("url = ",BASE_URL);
 
 export const FormProvider = ({ children }) => {
   const [entries, setEntries] = useState([]);
